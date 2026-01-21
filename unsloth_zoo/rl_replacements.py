@@ -853,6 +853,14 @@ def grpo_accumulated_loss(
         image_sizes_chunk,
         completion_ids 
     ) in zipped_inputs:
+            print("debug unsloth-zoo rl_replacements.py grpo_accumulated_loss info:")
+            print(f"input_ids_chunk: {input_ids_chunk}")
+            print(f"input_ids_chunk.shape: {input_ids_chunk.shape}")
+            print(f"attention_mask_chunk: {attention_mask_chunk}")
+            print(f"attention_mask_chunk.shape: {attention_mask_chunk.shape}")
+            print(f"completion_ids: {completion_ids}")
+            print(f"completion_ids.shape: {completion_ids.shape}")
+            print("debug unsloth-zoo rl_replacements.py grpo_accumulated_loss info end")
             with autocaster:
                 if pixel_values is None:
                     new_hidden_states_chunk = unwrapped_model(
