@@ -843,7 +843,15 @@ def grpo_accumulated_loss(
                 logit_softcapping, temperature
             )
     
-    
+    def inspect_tensor(name, tensor):
+        print(f"{name}:")
+        print(f"  shape: {tensor.shape}",end="")
+        print(f"  dtype: {tensor.dtype}",end="")
+        print(f"  device: {tensor.device}",end="")
+        print(f"  requires_grad: {tensor.requires_grad}",end="")
+        print(f"  is_leaf: {tensor.is_leaf}",end="")
+        print(f"  grad_fn: {tensor.grad_fn}",end="")
+        print("-"*40)
     for (
         input_ids_chunk,
         attention_mask_chunk,
@@ -854,13 +862,10 @@ def grpo_accumulated_loss(
         completion_ids 
     ) in zipped_inputs:
             print("debug unsloth-zoo rl_replacements.py grpo_accumulated_loss info:")
-            print(f"input_ids_chunk: {input_ids_chunk}")
-            print(f"input_ids_chunk.shape: {input_ids_chunk.shape}")
-            print(f"attention_mask_chunk: {attention_mask_chunk}")
-            print(f"attention_mask_chunk.shape: {attention_mask_chunk.shape}")
-            print(f"completion_ids: {completion_ids}")
-            print(f"completion_ids.shape: {completion_ids.shape}")
-            print("debug unsloth-zoo rl_replacements.py grpo_accumulated_loss info end")
+            inspect_tensor("input_ids_chunk", input_ids_chunk)
+            inspect_tensor("attention_mask_chunk", attention_mask_chunk)
+            inspect_tensor("completion_ids", completion_ids)
+            print("debug grpo_accumulated_loss info end")
             with autocaster:
                 if pixel_values is None:
                     new_hidden_states_chunk = unwrapped_model(
