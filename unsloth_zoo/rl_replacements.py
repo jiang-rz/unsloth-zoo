@@ -865,6 +865,8 @@ def grpo_accumulated_loss(
             inspect_tensor("input_ids_chunk", input_ids_chunk)
             inspect_tensor("attention_mask_chunk", attention_mask_chunk)
             inspect_tensor("completion_ids", completion_ids)
+            print("grad enabled:", torch.is_grad_enabled())
+
             print("debug grpo_accumulated_loss info end")
             with autocaster:
                 if pixel_values is None:
