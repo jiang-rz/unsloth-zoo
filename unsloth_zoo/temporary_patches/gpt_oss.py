@@ -1214,7 +1214,10 @@ def patch_GptOssModel():
                 "full_attention": create_causal_mask(**mask_kwargs),
                 "sliding_attention": create_sliding_window_causal_mask(**mask_kwargs),
             }
-
+        print("debug gpt_oss.py forward info:")
+        print("debug self.training:", self.training)
+        print("debug qlen:", hidden_states.shape[1])
+        print("debug attention_mask:", attention_mask)
         # is_decoding = is_flex_attention_decoding(self.layers[0].self_attn, hidden_states)
         bsz, qlen, hd = hidden_states.shape
         if not self.training and qlen == 1 and isinstance(attention_mask, dict):
